@@ -27,6 +27,6 @@ func (u *UserServiceImpl) GetUser() ([]*userModel.User, error) {
 	return u.userList, nil
 }
 
-func (u *UserServiceImpl) DeleteUser(str *string) error {
+func (u *UserServiceImpl) DeleteUser(str string) error {
 		return nil
 }
