@@ -45,14 +45,23 @@ func (uc *UserController) GetUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, users)
 }
 
+type NameReq struct {
+	Name string `uri:"name" binding:"required"`
+}
+
 func (uc *UserController) DeleteUser(ctx *gin.Context)  {
-	username := ctx.Query("name")
+	var name NameReq
+
+	if err := ctx.ShouldBindUri(&name); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": err})
+		return
+	}
 
 	// need logic
-	err := uc.UserService.DeleteUser(username)
+	err := uc.UserService.DeleteUser(name.Name)
 
 	if err != nil {
-		ctx.JSON(http.StatusBadGateway, gin.H{"message": err.Error()})
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})

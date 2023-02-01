@@ -4,6 +4,8 @@ import (
 	userModel "github.com/jjimgo/go_gin/models"
 
 	"context"
+	"reflect"
+	"errors"
 )
 
 type UserServiceImpl struct {
@@ -28,5 +30,21 @@ func (u *UserServiceImpl) GetUser() ([]*userModel.User, error) {
 }
 
 func (u *UserServiceImpl) DeleteUser(str string) error {
-		return nil
+	checkExisted := false
+
+	for index, user := range u.userList {
+		r := reflect.ValueOf(user)
+		name := reflect.Indirect(r).FieldByName("Name") // get Name
+		if(name.String() == str) {
+			checkExisted = true
+			u.userList = append(u.userList[:index], u.userList[index+1:]...)
+			println("hojin")
+		}
+	}
+
+	if (!checkExisted) {
+		return errors.New("존재하지 않는 이름")
+	}
+
+	return nil
 }
