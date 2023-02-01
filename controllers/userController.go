@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"net/http"
 	"github.com/jjimgo/go_gin/services"
+	"github.com/jjimgo/go_gin/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,7 +13,7 @@ type UserController struct {
 
 func New(u services.UserService) UserController {
 	return UserController {
-		UserService : u
+		UserService : u,
 	}
 }
 
@@ -19,13 +21,13 @@ func (uc *UserController) CreateUser(ctx *gin.Context) {
 	var user models.User
 
 	if err := ctx.ShouldBindJSON(&user); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H("message" : err.Error()))
+		ctx.JSON(http.StatusBadRequest, gin.H{"message" : err.Error()})
 		return
 	}
-	err : = uc.UserService.CreateUser(&user)
+	err := uc.UserService.CreateUser(&user)
 
 	if err != nil {
-		ctx.JSON(http.StatusBadGateway, gin.H("message " : err.Error()))
+		ctx.JSON(http.StatusBadGateway, gin.H{"message " : err.Error()})
 		return
 	}
 
@@ -33,9 +35,7 @@ func (uc *UserController) CreateUser(ctx *gin.Context) {
 }
 
 func (uc *UserController) GetUser(ctx *gin.Context) {
-	username := ctx.Params("name")
-
-	users, err : = uc.UserService.GetUser()
+	users, err := uc.UserService.GetUser()
 
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, gin.H{"message": err.Error()})
@@ -46,10 +46,10 @@ func (uc *UserController) GetUser(ctx *gin.Context) {
 }
 
 func (uc *UserController) DeleteUser(ctx *gin.Context)  {
-	username := ctx.Param("name")
+	username := ctx.Query("name")
 
-		// need logic
-	err : = uc.UserService.DeleteUser(username)
+	// need logic
+	err := uc.UserService.DeleteUser(username)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, gin.H{"message": err.Error()})
@@ -61,6 +61,6 @@ func (uc *UserController) DeleteUser(ctx *gin.Context)  {
 func (uc *UserController) RegisterUserRoutes(rg *gin.RouterGroup) {
 	userRoute := rg.Group("/user")
 	userRoute.POST("/create", uc.CreateUser)
-	userRoute.GET("/getUser/:name", uc.GetUser)
+	userRoute.GET("/getUser", uc.GetUser)
 	userRoute.DELETE("/deleteUser/:name", uc.DeleteUser)
 }

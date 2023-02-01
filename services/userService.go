@@ -7,5 +7,5 @@ import (
 type UserService interface {
 	CreateUser(*userModel.User) error
 	GetUser() ([]*userModel.User, error)
-	DeleteUser(*string) error
+	DeleteUser(string) error
 }
