@@ -1,0 +1,25 @@
+# 사용중인 ngnix
+
+http {
+
+    upstream golangserver {
+        server 127.0.0.1:1010;
+        server 127.0.0.1:2020;
+        server 127.0.0.1:3030;
+        server 127.0.0.1:4040;
+    }
+
+    server {
+        listen 80;
+        root /Users/yuhojin/Desktop/go_gin_study;
+
+        location / {
+            proxy_pass http://golangserver/;
+        }
+
+        access_log  /Users/yuhojin/Desktop/go_gin_study/ngnixLogs/host.access.log;
+        error_log   /Users/yuhojin/Desktop/go_gin_study/ngnixLogs/error.log;
+    }
+}
+
+events{}
