@@ -38,7 +38,6 @@ func (u *UserServiceImpl) DeleteUser(str string) error {
 		if(name.String() == str) {
 			checkExisted = true
 			u.userList = append(u.userList[:index], u.userList[index+1:]...)
-			println("hojin")
 		}
 	}
 
