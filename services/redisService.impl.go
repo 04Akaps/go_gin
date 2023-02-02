@@ -41,7 +41,7 @@ func (r *RedisServiceImpl) GetRedis(key string) (string, error) {
 }
 
 func (r *RedisServiceImpl) DeleteRedis(key string) error {
-	err := r.redis.Del(r.ctx, key)
+	_,err := r.redis.Del(r.ctx, key).Result()
 
 	if err != nil {
 		return err
