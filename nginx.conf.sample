@@ -15,6 +15,15 @@ http {
 
         location / {
             proxy_pass http://golangserver/;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_set_header X-Forwarded-Port $server_port;
         }
 
         access_log  /Users/yuhojin/Desktop/go_gin_study/ngnixLogs/host.access.log;
