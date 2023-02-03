@@ -26,6 +26,7 @@ type RedisUriReq struct {
 }
 
 func (redis *RedisController) SetRedis(ctx *gin.Context) {
+	ctx.ClientIP()
 	var req RedisReq
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
