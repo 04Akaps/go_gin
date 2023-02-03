@@ -13,3 +13,9 @@ Basic으로 간단한 CRUD를 gin을 통해서 구축해 두고 이후 redis, do
 `docker run -p ${입구 port}:8080 -d go_gin_study_test`
 - 입구 포트로 들어오는 요청은 8080으로 전송하는 docker image띄우기
 -- for nginx proxy
+
+`docker stop $(docker ps -a -q)`
+- 모든 컨테이너 중지
+
+`docker rmi $(docker images -q)`
+- 모든 이미지 삭제

@@ -55,6 +55,11 @@ func init() {
 
 func main() {
 	basePath := server.Group("/")
+	server.TrustedPlatform = "X-Client-IP"
+
+	// server.SetTrustedProxies([]string{"127.0.0.1", "::1"})
+	// 만약 whiteList가 필요하다면,
+	
 	uc.RegisterUserRoutes(basePath)
 	rdsc.RegisterRedisRouter(basePath)
 
