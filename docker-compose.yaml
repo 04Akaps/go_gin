@@ -1,0 +1,21 @@
+services:
+  first:
+    build: "./"
+    command: go run main.go
+    ports:
+      - 1010:8080
+  second:
+    build: "./"
+    command: go run main.go
+    ports:
+      - 2020:8080
+  third:
+    build: "./"
+    command: go run main.go
+    ports:
+      - 3030:8080
+  fourth:
+    build: "./"
+    command: go run main.go
+    ports:
+      - 4040:8080
