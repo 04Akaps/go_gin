@@ -22,6 +22,13 @@ Basic으로 간단한 CRUD를 gin을 통해서 구축해 두고 이후 redis, do
 
 - 모든 이미지 삭제
 
+# docker Volume
+
+volume를 사용하면 해당 값을 저장 가능하다.
+
+- 하지만 굳이 사용할 의미는 딱히 느껴지지 않기 떄문에 일단 skip
+- 추가로 Volume은 container를 관리하기 위한 저장공간으로 생각하면 됨
+
 # Ubuntu EC2
 
 `ssh -i 'key' ubuntu@ipaddr`
