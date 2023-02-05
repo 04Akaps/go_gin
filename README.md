@@ -29,6 +29,13 @@ volume를 사용하면 해당 값을 저장 가능하다.
 - 하지만 굳이 사용할 의미는 딱히 느껴지지 않기 떄문에 일단 skip
 - 추가로 Volume은 container를 관리하기 위한 저장공간으로 생각하면 됨
 
+# docker-compose
+
+여거개의 DockerFile을 관리하는 방법
+현재는 한개의 docker파일을 관리하지만, 여러개 관리할 떄 유용하다.
+현재 compose를 활용하여 여러개의 포트를 하나의 이미지에서 제어 중
+`docker-compose up -d`
+
 # Ubuntu EC2
 
 `ssh -i 'key' ubuntu@ipaddr`
