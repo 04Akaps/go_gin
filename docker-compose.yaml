@@ -1,21 +1,10 @@
 services:
-  first:
+  go_server:
     build: "./"
-    command: go run main.go
+    container_name: "go_gin_server"
     ports:
       - 1010:8080
-  second:
-    build: "./"
-    command: go run main.go
-    ports:
       - 2020:8080
-  third:
-    build: "./"
-    command: go run main.go
-    ports:
       - 3030:8080
-  fourth:
-    build: "./"
-    command: go run main.go
-    ports:
       - 4040:8080
+    restart: always
