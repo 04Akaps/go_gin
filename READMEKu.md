@@ -55,3 +55,57 @@ ngnix기준 입니다.
 3. `kubectl create -f deploy-example.yaml`
 
    파일을 통해서 Deploy하는 형태 입니다.
+
+4. `kubectl delete deploy mynginx2`
+
+   배포를 삭제 합니다.
+
+## Namespaces
+
+각각의 환경에 대해서 이름을 부여 가능합니다.
+
+- Ex: objectname.`prod`.svc.cluster.local
+- Ex: objectname.`dev`.svc.cluster.local
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: prod
+
+- NameSpace인 prod가 정의 됩니다.
+
+--------------------------------
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: myapp-pod
+    namespace: prod
+
+- Pod는 prod라는 NameSpace에 속하게 됩니다.
+```
+
+1. `kubectl get ns`
+
+   현재 있는 Namespaces들을 가져 옵니다.
+
+2. `kubectl config set-context --current --namespace=[namespacename]`
+
+   현재 컨텍스트가 해당 nameSpace를 사용하게 설정합니다.
+
+3. `kubectl create ns [namespace]`
+
+   새로운 nameSpace를 만들어 냅니다.
+
+4. `kubectl delete ns [namespace]`
+
+   namespace를 삭제합니다.
+
+5. `kubectl get pods --all-namespaces`
+
+   pods를 모든 namespace에서 가져옵니다.
+
+6. `kubectl get pods -n nameSpace`
+
+   특정 nameSpace에서 pods들을 가져 옵니다.
