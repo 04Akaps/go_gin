@@ -34,5 +34,11 @@ go version'''
       }
     }
 
+    stage('') {
+      steps {
+        sh 'go mod download'
+      }
+    }
+
   }
 }
