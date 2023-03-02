@@ -15,7 +15,7 @@ pipeline {
 
     stage('Download dependencies') {
       steps {
-        sh 'go env'
+        sh 'which go'
       }
     }
 
