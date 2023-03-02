@@ -20,21 +20,11 @@ pipeline {
 # Download Go package
 wget https://golang.org/dl/go1.17.5.linux-amd64.tar.gz
 
-# Extract Go package
-tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
-
-# Add Go binary directory to the system PATH
-echo \'export PATH=$PATH:/usr/local/go/bin\' >> /etc/profile
-
-# Load the updated PATH variable
-source /etc/profile
-
-# Verify Go installation
 go version'''
       }
     }
 
-    stage('') {
+    stage('error') {
       steps {
         sh 'go mod download'
       }
