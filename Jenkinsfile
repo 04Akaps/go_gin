@@ -15,12 +15,7 @@ pipeline {
 
     stage('Download dependencies') {
       steps {
-        sh '''dependencies=$(go list -f \'{{if not (or .Main .Indirect)}}{{.Path}}@{{.Version}}{{end}}\' -m all)
-
-for dependency in $dependencies
-do
-  go get $dependency
-done'''
+        sh 'go env'
       }
     }
 
