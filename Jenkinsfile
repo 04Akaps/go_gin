@@ -8,10 +8,8 @@ pipeline {
     }
 
     stage('Download dependencies') {
-      parallel {
-        stage('Download dependencies') {
-          steps {
-            sh '''#!/bin/bash
+      steps {
+        sh '''#!/bin/bash
 
 # Download Go package with curl
 curl -LO https://golang.org/dl/go1.17.5.linux-amd64.tar.gz
@@ -27,16 +25,10 @@ source /etc/profile
 
 # Verify Go installation
 go version
-'''
-          }
-        }
 
-        stage('') {
-          steps {
-            sh 'go mod download'
-          }
-        }
 
+# Install Go library
+go mod download'''
       }
     }
 
