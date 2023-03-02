@@ -15,7 +15,12 @@ pipeline {
 
     stage('Download dependencies') {
       steps {
-        sh 'go mod download'
+        sh '''dependencies=$(go list -f \'{{if not (or .Main .Indirect)}}{{.Path}}@{{.Version}}{{end}}\' -m all)
+
+for dependency in $dependencies
+do
+  go get $dependency
+done'''
       }
     }
 
