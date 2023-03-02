@@ -7,9 +7,15 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('check ls-al') {
       steps {
         sh 'ls -al'
+      }
+    }
+
+    stage('Download dependencies') {
+      steps {
+        sh 'go mod download'
       }
     }
 
